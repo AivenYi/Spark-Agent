@@ -54,6 +54,8 @@ const footprints = [
   },
 ];
 
+import { handleWeChatContact } from '@/lib/contact';
+
 export default function Partners() {
   return (
     <section id="partners" className="py-20 lg:py-28 bg-gradient-to-b from-red-50/50 to-white">
@@ -229,17 +231,13 @@ export default function Partners() {
           <p className="text-xl text-gray-700 mb-6">
             我们期待与更多企业、组织携手，让红色教育走进更多课堂，让历史<span className="text-red-600 font-bold">"活起来"</span>！
           </p>
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+          <button
+            onClick={handleWeChatContact}
             className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium transition-colors shadow-lg shadow-red-200"
           >
             联系我们
             <ArrowRight className="w-5 h-5" />
-          </a>
+          </button>
         </div>
       </div>
     </section>

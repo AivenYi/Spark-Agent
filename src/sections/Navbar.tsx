@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, MessageCircle } from 'lucide-react';
+import { handleWeChatContact } from '@/lib/contact';
 
 const navLinks = [
   { label: '首页', href: '#home' },
@@ -130,7 +131,7 @@ export default function Navbar() {
               ))}
               <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-red-100">
                 <Button
-                  onClick={() => scrollToSection('#contact')}
+                  onClick={handleWeChatContact}
                   className="bg-red-600 hover:bg-red-700 text-white w-full"
                 >
                   <MessageCircle className="w-4 h-4 mr-2" />

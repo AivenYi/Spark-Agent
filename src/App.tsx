@@ -8,6 +8,7 @@ import Team from './sections/Team';
 import Partners from './sections/Partners';
 import Footer from './sections/Footer';
 import ChatInterface from './sections/ChatInterface';
+import { Toaster } from "@/components/ui/sonner"
 
 function App() {
   const [showChat, setShowChat] = useState(false);
@@ -21,7 +22,12 @@ function App() {
   }, []);
 
   if (showChat) {
-    return <ChatInterface />;
+    return (
+      <>
+        <ChatInterface />
+        <Toaster />
+      </>
+    );
   }
 
   return (
@@ -52,6 +58,7 @@ function App() {
           与延生对话
         </span>
       </button>
+      <Toaster />
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import { MessageCircle, ArrowUp, Sparkles, Heart } from 'lucide-react';
 
+import { handleWeChatContact } from '@/lib/contact';
+
 const navLinks = [
   { label: '首页', href: '#home' },
   { label: '产品特色', href: '#features' },
@@ -72,7 +74,11 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-6">联系我们</h4>
             <div className="space-y-4">
-              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+              <div 
+                onClick={handleWeChatContact}
+                className="bg-white/5 rounded-xl p-4 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors"
+                title="点击复制微信号并打开微信"
+              >
                 <div className="text-sm text-gray-400 mb-1">微信联系</div>
                 <div className="flex items-center gap-2">
                   <MessageCircle className="w-5 h-5 text-green-500" />
