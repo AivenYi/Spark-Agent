@@ -135,14 +135,18 @@ export default function ChatInterface() {
           }
         }
 
-        const content = data.choices?.[0]?.message?.content ?? '';
-        const assistantMessage: Message = {
-          id: uid(),
-          role: 'assistant',
-          content,
-          timestamp: new Date(),
-        };
-        setMessages((prev) => [...prev, assistantMessage]);
+        if (data && data.choices?.[0]?.message?.content) {
+          const content = data.choices[0].message.content;
+          const assistantMessage: Message = {
+            id: uid(),
+            role: 'assistant',
+            content,
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, assistantMessage]);
+        } else {
+          throw new Error('No valid response data received from API');
+        }
 
       } else {
         // Coze API Logic (Existing)

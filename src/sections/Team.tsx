@@ -1,5 +1,12 @@
 import { Sparkles, GraduationCap, Code, Heart, Briefcase } from 'lucide-react';
 
+type Member = {
+  title: string;
+  image: string;
+  color: string;
+  name?: string;
+};
+
 const universities = [
   { name: '中国人民大学', logo: '/images/人大logo.png' },
   { name: '清华大学', logo: '/images/清华logo.png' },
@@ -9,7 +16,7 @@ const universities = [
   { name: '江西软件职业技术大学', logo: '/images/江软logo.png' },
 ];
 
-const firstRow = [
+const firstRow: Member[] = [
   {
     title: '星火创生者',
     // name: '董丁毓',
@@ -30,7 +37,7 @@ const firstRow = [
   },
 ];
 
-const secondRow = [
+const secondRow: Member[] = [
   {
     title: '源火锻芯人',
     // name: '洪运',
@@ -111,15 +118,15 @@ export default function Team() {
               <div className="relative aspect-[3/4] overflow-hidden">
                 <img
                   src={member.image}
-                  alt={member.name}
+                  alt={member.name?.trim() ? member.name : member.title}
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              {(member.name && member.name.trim() !== '') && (
+              {(member.name?.trim() && member.name.trim() !== '') && (
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="bg-white/95 backdrop-blur-sm rounded-xl px-4 py-3 shadow-lg text-center">
-                    <span className="font-bold text-gray-900 text-lg">{member.name}</span>
+                    <span className="font-bold text-gray-900 text-lg">{member.name!}</span>
                   </div>
                 </div>
               )}
@@ -139,15 +146,15 @@ export default function Team() {
               <div className="relative aspect-[3/4] overflow-hidden">
                 <img
                   src={member.image}
-                  alt={member.name}
+                  alt={member.name?.trim() ? member.name : member.title}
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              {(member.name && member.name.trim() !== '') && (
+              {(member.name?.trim() && member.name.trim() !== '') && (
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="bg-white/95 backdrop-blur-sm rounded-xl px-4 py-3 shadow-lg text-center">
-                    <span className="font-bold text-gray-900 text-lg">{member.name}</span>
+                    <span className="font-bold text-gray-900 text-lg">{member.name!}</span>
                   </div>
                 </div>
               )}

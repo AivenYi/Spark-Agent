@@ -1,5 +1,4 @@
 import { MessageCircle, ArrowUp, Sparkles, Heart } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const navLinks = [
   { label: '首页', href: '#home' },

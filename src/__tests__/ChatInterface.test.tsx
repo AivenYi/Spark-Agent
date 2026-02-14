@@ -19,7 +19,7 @@ vi.mock('groq-sdk', () => {
           create: mockCreate
         }
       }
-      constructor(options: any) {}
+      constructor() {}
     }
   };
 });
@@ -45,11 +45,14 @@ vi.mock('@/config/ai', () => ({
 }));
 
 // Mock ResizeObserver
-global.ResizeObserver = class ResizeObserver {
+const mockResizeObserver = class ResizeObserver {
   observe() {}
   unobserve() {}
   disconnect() {}
 };
+
+// @ts-ignore
+window.ResizeObserver = mockResizeObserver;
 
 describe('ChatInterface', () => {
   beforeEach(() => {
