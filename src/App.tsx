@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from './sections/Navbar';
 import Hero from './sections/Hero';
+import Process from './sections/Process';
 import Features from './sections/Features';
 import Functions from './sections/Functions';
 import Team from './sections/Team';
@@ -28,6 +29,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <Process />
         <Features />
         <Functions />
         <Team />

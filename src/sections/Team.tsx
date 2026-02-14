@@ -3,46 +3,57 @@ import { Sparkles, GraduationCap, Code, Heart, Briefcase } from 'lucide-react';
 const universities = [
   { name: '中国人民大学', logo: '/images/人大logo.png' },
   { name: '清华大学', logo: '/images/清华logo.png' },
+  { name: '北京大学', logo: '/images/北大logo.png' },
+  { name: '复旦大学', logo: '/images/复旦logo.png' },
   { name: '中国石油大学', logo: '/images/中石油logo.png' },
   { name: '江西软件职业技术大学', logo: '/images/江软logo.png' },
 ];
 
-const teamMembers = [
+const firstRow = [
   {
     title: '星火创生者',
-    name: '董丁毓',
+    // name: '董丁毓',
     image: '/images/董.png',
     color: 'from-red-500 to-red-600',
   },
   {
     title: '源焰守护人',
-    name: '周伊江',
+    // name: '周伊江',
     image: '/images/周.png',
     color: 'from-amber-500 to-amber-600',
   },
   {
     title: '淬焰精工师',
-    name: '易海',
+    // name: '易海',
     image: '/images/易.png',
     color: 'from-red-500 to-amber-500',
   },
+];
+
+const secondRow = [
+  {
+    title: '源火锻芯人',
+    // name: '洪运',
+    image: '/images/洪运.png',
+    color: 'from-red-700 to-red-600',
+  },
+  {
+    title: '渡焰引川人',
+    // name: '赵博轩',
+    image: '/images/赵.png',
+    color: 'from-amber-600 to-amber-500',
+  },
   {
     title: '心光引燃人',
-    name: '卢昊禹',
+    // name: '卢昊禹',
     image: '/images/卢.png',
     color: 'from-amber-500 to-red-500',
   },
   {
     title: '智炬擎光者',
-    name: '胡承鑫',
+    // name: '胡承鑫',
     image: '/images/胡.png',
     color: 'from-red-600 to-red-500',
-  },
-  {
-    title: '渡焰引川人',
-    name: '赵博轩',
-    image: '/images/赵.png',
-    color: 'from-amber-600 to-amber-500',
   },
 ];
 
@@ -70,38 +81,33 @@ export default function Team() {
           </h2>
         </div>
 
-        {/* University Logos */}
-        <div className="flex flex-wrap justify-center items-center gap-8 mb-16">
-          {universities.map((uni, index) => (
-            <div
-              key={index}
-              className="group flex flex-col items-center gap-2"
-            >
-              <div className="w-24 h-24 rounded-xl bg-gray-50 p-3 flex items-center justify-center group-hover:bg-red-50 transition-colors border border-gray-100 group-hover:border-red-200">
-                <img
-                  src={uni.logo}
-                  alt={uni.name}
-                  className="max-w-full max-h-full object-contain"
-                />
+        <div className="marquee-container mb-16">
+          <div className="marquee-track py-2">
+            {[...universities, ...universities].map((uni, index) => (
+              <div key={`uni-${index}`} className="marquee-item group flex flex-col items-center mx-4">
+                <div className="w-32 h-32 rounded-2xl bg-white p-4 flex items-center justify-center shadow-sm border border-gray-100 group-hover:bg-red-50 transition-colors">
+                  <img
+                    src={uni.logo}
+                    alt={uni.name}
+                    className="max-w-[88%] max-h-[88%] object-contain"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/生成星火延生组织 logo-纯图标版.png'; }}
+                  />
+                </div>
+                <span className="text-xs text-gray-500 text-center mt-2">{uni.name}</span>
               </div>
-              <span className="text-xs text-gray-500 text-center">{uni.name}</span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* Team Members Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {teamMembers.map((member, index) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {firstRow.map((member, index) => (
             <div
-              key={index}
+              key={`first-${index}`}
               className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100"
             >
-              {/* Title Header */}
               <div className={`bg-gradient-to-r ${member.color} p-4 text-center`}>
                 <h3 className="text-white font-bold text-lg">{member.title}</h3>
               </div>
-
-              {/* Image */}
               <div className="relative aspect-[3/4] overflow-hidden">
                 <img
                   src={member.image}
@@ -110,13 +116,41 @@ export default function Team() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-
-              {/* Name Badge */}
-              <div className="absolute bottom-4 left-4 right-4">
-                <div className="bg-white/95 backdrop-blur-sm rounded-xl px-4 py-3 shadow-lg text-center">
-                  <span className="font-bold text-gray-900 text-lg">{member.name}</span>
+              {(member.name && member.name.trim() !== '') && (
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-xl px-4 py-3 shadow-lg text-center">
+                    <span className="font-bold text-gray-900 text-lg">{member.name}</span>
+                  </div>
                 </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          {secondRow.map((member, index) => (
+            <div
+              key={`second-${index}`}
+              className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100"
+            >
+              <div className={`bg-gradient-to-r ${member.color} p-4 text-center`}>
+                <h3 className="text-white font-bold text-lg">{member.title}</h3>
               </div>
+              <div className="relative aspect-[3/4] overflow-hidden">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              {(member.name && member.name.trim() !== '') && (
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-xl px-4 py-3 shadow-lg text-center">
+                    <span className="font-bold text-gray-900 text-lg">{member.name}</span>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>

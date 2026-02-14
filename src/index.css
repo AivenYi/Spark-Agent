@@ -4,34 +4,34 @@
 
 @layer base {
   :root {
-    --background: 0 0% 97%;
+    --background: 0 0% 98%;
     --foreground: 0 0% 10%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 10%;
-    --primary: 0 72% 51%;
+    --primary: 0 75% 35%; /* 深红 - Crimson Red */
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 30% 96%;
-    --secondary-foreground: 0 72% 51%;
-    --muted: 0 20% 95%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 45 90% 55%;
+    --secondary: 0 10% 96%;
+    --secondary-foreground: 0 75% 35%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 45 60% 50%; /* 稳重的金/琥珀色 */
     --accent-foreground: 0 0% 10%;
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 60% 40%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 20% 88%;
-    --input: 0 20% 88%;
-    --ring: 0 72% 51%;
-    --radius: 0.625rem;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 0 75% 35%;
+    --radius: 0.75rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 0 72% 51%;
+    --sidebar-primary: 0 75% 35%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 30% 96%;
-    --sidebar-accent-foreground: 0 72% 51%;
-    --sidebar-border: 0 20% 88%;
-    --sidebar-ring: 0 72% 51%;
+    --sidebar-accent: 0 10% 96%;
+    --sidebar-accent-foreground: 0 75% 35%;
+    --sidebar-border: 0 0% 88%;
+    --sidebar-ring: 0 75% 35%;
   }
 }
 
@@ -49,12 +49,33 @@
 
 @layer utilities {
   .text-gradient-red {
-    @apply bg-gradient-to-r from-red-600 via-red-500 to-amber-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-red-800 via-red-700 to-amber-600 bg-clip-text text-transparent;
   }
   .bg-gradient-red {
-    @apply bg-gradient-to-r from-red-600 to-red-500;
+    @apply bg-gradient-to-r from-red-800 to-red-700;
   }
   .bg-gradient-gold {
-    @apply bg-gradient-to-r from-amber-400 to-amber-500;
+    @apply bg-gradient-to-r from-amber-500 to-amber-600;
   }
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: marquee-left 30s linear infinite;
+}
+
+.marquee-item {
+  flex: 0 0 auto;
 }

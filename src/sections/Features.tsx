@@ -58,8 +58,8 @@ export default function Features() {
               </div>
               {/* Stats Card */}
               <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-2xl shadow-xl p-6 flex flex-col justify-center text-white">
-                <div className="text-4xl font-bold mb-2">2025</div>
-                <div className="text-red-100">抗战胜利80周年</div>
+                <div className="text-4xl font-bold mb-2">2026</div>
+                <div className="text-red-100">抗战胜利81周年</div>
                 <div className="mt-4 text-sm text-red-100">
                   特别企划 · 传承红色基因
                 </div>

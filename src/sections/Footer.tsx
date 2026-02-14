@@ -80,15 +80,11 @@ export default function Footer() {
                   <span className="font-mono text-lg">BaorongLixingWenhe</span>
                 </div>
               </div>
-              
-              <div className="flex gap-3">
-                <Button
-                  onClick={() => window.open('https://www.coze.cn/store/agent/7575196766925176872?bid=6iqcr91cg100f', '_blank')}
-                  className="flex-1 bg-red-600 hover:bg-red-700"
-                >
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  体验Demo
-                </Button>
+              <div className="rounded-xl p-4 border border-white/10 bg-white/5">
+                <div className="text-xs text-gray-500">说明</div>
+                <div className="text-sm text-gray-400 leading-relaxed mt-1">
+                  如需申请试用或合作洽谈，请通过上方微信与我们联系。
+                </div>
               </div>
             </div>
           </div>

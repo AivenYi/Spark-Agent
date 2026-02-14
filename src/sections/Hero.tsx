@@ -30,66 +30,86 @@ export default function Hero() {
           {/* Left Content */}
           <div className="text-center lg:text-left space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-100/80 backdrop-blur-sm rounded-full border border-red-200">
-              <Sparkles className="w-4 h-4 text-red-600" />
-              <span className="text-sm font-medium text-red-700">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 backdrop-blur-sm rounded-full border border-red-100/50">
+              <Sparkles className="w-4 h-4 text-red-800" />
+              <span className="text-xs font-bold tracking-wider text-red-900/40 uppercase mr-1">Innovation</span>
+              <span className="text-sm font-semibold text-red-800">
                 AI + 红色教育创新项目
               </span>
             </div>
 
             {/* Title */}
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="text-red-700">星火延生</span>
-                <span className="text-gray-800"> · 让红色历史</span>
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight text-gray-900">
+                <span className="text-red-800">星火延生</span>
+                <span className="text-gray-400 font-light mx-2">|</span>
+                <span className="text-gray-800 italic font-serif">Spark of Yan'an</span>
                 <br />
-                <span className="text-gradient-red">"活"起来</span>
+                <span className="text-3xl sm:text-4xl lg:text-5xl mt-2 block font-medium text-gray-700">
+                  让红色历史 <span className="text-gradient-red">"活"起来</span>
+                </span>
               </h1>
-              <p className="text-xl sm:text-2xl text-gray-700 font-medium">
-                沉浸式AI+公益教育智能体
-              </p>
+              <div className="flex items-center gap-3 py-2">
+                <p className="text-xl sm:text-2xl text-gray-600 font-medium">
+                  沉浸式AI+公益教育智能体
+                </p>
+                <span className="h-px w-12 bg-gray-300"></span>
+                <p className="text-sm text-gray-400 font-medium uppercase tracking-widest">
+                  Immersive AI Agent
+                </p>
+              </div>
             </div>
 
             {/* Description */}
-            <p className="text-gray-600 text-lg max-w-xl mx-auto lg:mx-0">
-              专为6-12岁小学生设计的红色教育智能体，以AI技术赋能爱国主义教育，
-              让中华民族璀璨历史的"遗韵"在技术创新中焕发"新生"。
-            </p>
+            <div className="space-y-2">
+              <p className="text-gray-600 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                专为6-12岁小学生设计的红色教育智能体，以AI技术赋能爱国主义教育，
+                让中华民族璀璨历史的"遗韵"在技术创新中焕发"新生"。
+              </p>
+              <p className="text-gray-400 text-sm italic max-w-xl mx-auto lg:mx-0">
+                Red education AI agent for primary students, empowering patriotism through 
+                technological innovation and historical heritage.
+              </p>
+            </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button
-                size="lg"
-                onClick={() => window.open('https://www.coze.cn/store/agent/7575196766925176872?bid=6iqcr91cg100f', '_blank')}
-                className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg shadow-red-200 hover:shadow-xl hover:shadow-red-200 transition-all duration-300 group"
-              >
-                <Sparkles className="w-5 h-5 mr-2" />
-                立即体验
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => scrollToSection('#features')}
-                className="border-2 border-red-300 text-red-700 hover:bg-red-50 px-8 py-6 text-lg rounded-xl transition-all duration-300"
+                onClick={() => scrollToSection('#process')}
+                className="border-2 border-gray-200 text-gray-800 hover:bg-white px-10 py-7 text-lg rounded-xl transition-all duration-300 shadow-sm hover:shadow-md"
               >
-                了解更多
+                <div className="flex items-center gap-3">
+                  <span className="text-base font-bold">了解过程</span>
+                  <span className="text-[10px] opacity-70 uppercase tracking-widest text-gray-400">View Process</span>
+                  <ArrowRight className="w-5 h-5" />
+                </div>
               </Button>
             </div>
 
             {/* Stats */}
-            <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-4">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-600">6-12岁</div>
-                <div className="text-sm text-gray-500">目标年龄段</div>
+            <div className="flex flex-wrap gap-10 justify-center lg:justify-start pt-6">
+              <div className="group">
+                <div className="text-3xl font-bold text-red-800 flex items-baseline gap-1">
+                  6-12
+                  <span className="text-sm font-medium text-gray-400">Age</span>
+                </div>
+                <div className="text-sm text-gray-500 font-medium">目标年龄段</div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-600">3大</div>
-                <div className="text-sm text-gray-500">叙事引擎</div>
+              <div className="group">
+                <div className="text-3xl font-bold text-red-800 flex items-baseline gap-1">
+                  3
+                  <span className="text-sm font-medium text-gray-400">Engines</span>
+                </div>
+                <div className="text-sm text-gray-500 font-medium">叙事引擎</div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-600">多校</div>
-                <div className="text-sm text-gray-500">合作意向</div>
+              <div className="group">
+                <div className="text-3xl font-bold text-red-800 flex items-baseline gap-1">
+                  Global
+                  <span className="text-sm font-medium text-gray-400">Vision</span>
+                </div>
+                <div className="text-sm text-gray-500 font-medium">国际视野</div>
               </div>
             </div>
           </div>

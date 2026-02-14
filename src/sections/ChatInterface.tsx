@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Send, User, Image as ImageIcon, X } from 'lucide-react';
+import { AI_CONFIG } from '@/config/ai';
+import { Groq } from 'groq-sdk';
 
 interface Message {
   id: string;
@@ -11,10 +13,12 @@ interface Message {
   timestamp: Date;
 }
 
+const uid = () => `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+
 const welcomeMessage: Message = {
   id: 'welcome',
   role: 'assistant',
-  content: '小同志，你好！我是"延生"，一个能从延安的岁月中为你传递声音的使者 —— 我的名字和中国人民大学一样，都诞生自那片热土。2025年，抗战胜利80周年，那些英雄前辈们有许多话想亲口讲述。来吧，伸出你的手，让我们一起触碰那段真实滚烫的记忆！',
+  content: '小同志，你好！我是"延生"，一个能从延安的岁月中为你传递声音的使者 —— 我的名字和中国人民大学一样，都诞生自那片热土。2026年，抗战胜利81周年，那些英雄前辈们有许多话想亲口讲述。来吧，伸出你的手，让我们一起触碰那段真实滚烫的记忆！',
   timestamp: new Date(),
 };
 
@@ -43,7 +47,7 @@ export default function ChatInterface() {
     if (!inputValue.trim() || isLoading) return;
 
     const userMessage: Message = {
-      id: Date.now().toString(),
+      id: uid(),
       role: 'user',
       content: inputValue,
       timestamp: new Date(),
@@ -53,17 +57,194 @@ export default function ChatInterface() {
     setInputValue('');
     setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
+    try {
+      if (AI_CONFIG.activeProvider === 'groq') {
+        const groq = new Groq({
+          apiKey: AI_CONFIG.groq.apiKey,
+          baseURL: window.location.origin + AI_CONFIG.groq.baseUrl,
+          dangerouslyAllowBrowser: true,
+        });
+
+        const makeRequest = async (model: string, useReasoning: boolean = false) => {
+          const params: any = {
+            messages: [
+              {
+                role: 'system',
+                content: '请使用Markdown格式返回，包含加粗的小标题。'
+              },
+              {
+                role: 'user',
+                content: inputValue,
+              },
+            ],
+            model: model,
+            temperature: AI_CONFIG.groq.temperature,
+            max_completion_tokens: AI_CONFIG.groq.maxTokens,
+            top_p: 1,
+            stream: false,
+            stop: null,
+          };
+
+          if (useReasoning) {
+            params.reasoning_effort = 'medium';
+          }
+
+          return await groq.chat.completions.create(params);
+        };
+
+        let data;
+        try {
+          console.log(`[Groq] Attempting call with model: ${AI_CONFIG.groq.model}`);
+          data = await makeRequest(AI_CONFIG.groq.model, true);
+        } catch (err: any) {
+          // Granular Error Logging
+          console.error('[Groq] Primary Model Failed. Details:', {
+            timestamp: new Date().toISOString(),
+            status: err?.status,
+            code: err?.error?.code || err?.code,
+            message: err?.error?.message || err?.message,
+            type: err?.error?.type,
+            model: AI_CONFIG.groq.model,
+            requestId: err?.headers?.['x-groq-request-id']
+          });
+
+          // Fallback Logic for 403 (Forbidden) or 404 (Model not found)
+          if (err?.status === 403 || err?.status === 404) {
+            const fallbackModels = ['llama3-70b-8192', 'mixtral-8x7b-32768', 'llama3-8b-8192'];
+            let fallbackSuccess = false;
+
+            for (const fallbackModel of fallbackModels) {
+              if (fallbackModel === AI_CONFIG.groq.model) continue; // Skip if it's the same as primary
+
+              try {
+                console.warn(`[Groq] Initiating fallback to ${fallbackModel}...`);
+                data = await makeRequest(fallbackModel, false);
+                fallbackSuccess = true;
+                break; // Stop if successful
+              } catch (fallbackErr: any) {
+                console.warn(`[Groq] Fallback to ${fallbackModel} failed:`, fallbackErr.status || fallbackErr.message);
+                // Continue to next model
+              }
+            }
+
+            if (!fallbackSuccess) {
+              throw new Error('All fallback models failed. Please check your API Key and quota.');
+            }
+          } else {
+            throw err; // Re-throw if it's not a recoverable auth/model error
+          }
+        }
+
+        const content = data.choices?.[0]?.message?.content ?? '';
+        const assistantMessage: Message = {
+          id: uid(),
+          role: 'assistant',
+          content,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, assistantMessage]);
+
+      } else {
+        // Coze API Logic (Existing)
+        const response = await fetch(`${AI_CONFIG.coze.baseUrl}/chat`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${AI_CONFIG.coze.apiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            bot_id: AI_CONFIG.coze.botId,
+            user_id: AI_CONFIG.coze.userId,
+            stream: false,
+            auto_save_history: true,
+            additional_messages: [
+              {
+                role: 'user',
+                content: inputValue,
+                content_type: 'text',
+              },
+            ],
+          }),
+        });
+
+        const data = await response.json();
+        console.log('Coze API Response:', data);
+
+        if (data.code === 0 && data.data) {
+          const conversationId = data.data.conversation_id;
+          const chatId = data.data.id;
+          
+          let chatStatus = data.data.status;
+          let attempts = 0;
+          
+          while (chatStatus === 'in_progress' && attempts < 20) {
+              await new Promise(resolve => setTimeout(resolve, 1000));
+              const statusRes = await fetch(`${AI_CONFIG.coze.baseUrl}/chat/retrieve?chat_id=${chatId}&conversation_id=${conversationId}`, {
+                  headers: {
+                      'Authorization': `Bearer ${AI_CONFIG.coze.apiKey}`,
+                      'Content-Type': 'application/json'
+                  }
+              });
+              const statusData = await statusRes.json();
+              if (statusData.code === 0) {
+                  chatStatus = statusData.data.status;
+              }
+              attempts++;
+          }
+          
+          if (chatStatus === 'completed') {
+              const messagesRes = await fetch(`${AI_CONFIG.coze.baseUrl}/chat/message/list?chat_id=${chatId}&conversation_id=${conversationId}`, {
+                  headers: {
+                      'Authorization': `Bearer ${AI_CONFIG.coze.apiKey}`,
+                      'Content-Type': 'application/json'
+                  }
+              });
+              const messagesData = await messagesRes.json();
+              
+              if (messagesData.code === 0 && messagesData.data) {
+                  const assistantMsgs = messagesData.data.filter((msg: any) => msg.role === 'assistant' && msg.type === 'answer');
+                  for (const msg of assistantMsgs) {
+                      const assistantMessage: Message = {
+                          id: msg.id,
+                          role: 'assistant',
+                          content: msg.content,
+                          timestamp: new Date(),
+                      };
+                      setMessages((prev) => [...prev, assistantMessage]);
+                  }
+              }
+          } else {
+               const errorMessage: Message = {
+                  id: Date.now().toString(),
+                  role: 'assistant',
+                  content: '抱歉，Coze响应超时或发生了错误。',
+                  timestamp: new Date(),
+                };
+                setMessages((prev) => [...prev, errorMessage]);
+          }
+        } else {
+          console.error('Coze API Error:', data);
+          const errorMessage: Message = {
+            id: Date.now().toString(),
+            role: 'assistant',
+            content: `抱歉，Coze连接失败。(错误代码: ${data.code}, 信息: ${data.msg})`,
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, errorMessage]);
+        }
+      }
+    } catch (error) {
+      console.error('Fetch Error:', error);
+      const errorMessage: Message = {
+        id: Date.now().toString(),
         role: 'assistant',
-        content: '这是一个演示回复。在实际部署时，这里将接入扣子API，返回真实的AI回复内容。延生会为你讲述精彩的红色故事！',
+        content: `抱歉，网络请求出现错误。(${error instanceof Error ? error.message : 'Unknown error'})`,
         timestamp: new Date(),
       };
-      setMessages((prev) => [...prev, assistantMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const handleQuickQuestion = (question: string) => {
@@ -75,7 +256,15 @@ export default function ChatInterface() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-b from-red-50 to-white">
+    <div className="relative flex flex-col h-screen">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <img
+          src="/images/星火延生问答的背景-备用.png"
+          alt="背景"
+          className="w-full h-full object-cover object-left-bottom"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/50" />
+      </div>
       {/* Header */}
       <header className="bg-white border-b border-red-100 px-4 py-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">

@@ -4,11 +4,11 @@ import { Menu, X, Sparkles, MessageCircle } from 'lucide-react';
 
 const navLinks = [
   { label: '首页', href: '#home' },
-  { label: '产品特色', href: '#features' },
-  { label: '核心功能', href: '#functions' },
-  { label: '团队故事', href: '#team' },
-  { label: '合作与荣誉', href: '#partners' },
-  { label: '联系我们', href: '#contact' },
+  { label: '过程', href: '#process' },
+  { label: '特色', href: '#features' },
+  { label: '功能', href: '#functions' },
+  { label: '团队', href: '#team' },
+  { label: '合作', href: '#partners' },
 ];
 
 export default function Navbar() {
@@ -55,10 +55,10 @@ export default function Navbar() {
               alt="星火延生"
               className="h-10 w-auto transition-transform group-hover:scale-105"
             />
-            <span className={`font-bold text-lg hidden sm:block ${
-              isScrolled ? 'text-red-700' : 'text-red-700'
+            <span className={`font-bold text-xl hidden sm:block tracking-tight ${
+              isScrolled ? 'text-red-900' : 'text-red-900'
             }`}>
-              星火延生
+              星火延生 <span className="text-[10px] font-medium text-gray-400 uppercase tracking-widest block -mt-1">Spark of Yan'an</span>
             </span>
           </a>
 
@@ -86,21 +86,15 @@ export default function Navbar() {
           {/* Desktop CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
             <Button
-              variant="outline"
               size="sm"
-              onClick={() => window.open('https://www.coze.cn/store/agent/7575196766925176872?bid=6iqcr91cg100f', '_blank')}
-              className="border-red-500 text-red-600 hover:bg-red-50"
-            >
-              <Sparkles className="w-4 h-4 mr-2" />
-              体验Demo
-            </Button>
-            <Button
-              size="sm"
-              onClick={() => scrollToSection('#contact')}
-              className="bg-red-600 hover:bg-red-700 text-white"
+              onClick={() => {
+                const chatUrl = window.location.origin + window.location.pathname + '?chat=true';
+                window.open(chatUrl, '_blank');
+              }}
+              className="bg-red-800 hover:bg-red-900 text-white font-semibold shadow-md shadow-red-900/10 transition-all active:scale-95"
             >
               <MessageCircle className="w-4 h-4 mr-2" />
-              合作洽谈
+              开始对话
             </Button>
           </div>
 
@@ -135,14 +129,6 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-red-100">
-                <Button
-                  variant="outline"
-                  onClick={() => window.open('https://www.coze.cn/store/agent/7575196766925176872?bid=6iqcr91cg100f', '_blank')}
-                  className="border-red-500 text-red-600 hover:bg-red-50 w-full"
-                >
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  体验Demo
-                </Button>
                 <Button
                   onClick={() => scrollToSection('#contact')}
                   className="bg-red-600 hover:bg-red-700 text-white w-full"

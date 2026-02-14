@@ -22,7 +22,7 @@ const partners = [
   { name: '小荷公益事业发展中心', logo: '/images/小荷公益logo.jpg' },
   { name: '中国人民大学文学院青年志愿者协会', logo: '/images/人大文院青协logo.png' },
   { name: '爱烛轩科技', logo: '/images/爱烛轩科技logo.jpg' },
-  { name: 'Way to AGI', logo: null },
+  { name: 'Way to AGI', logo: '/images/画板 1WaytoAGI无文字Logo.png' },
   { name: '中国石油大学（北京）校青协', logo: '/images/中石油校青协logo.png' },
   { name: '江西省贵溪市文坊中小学', logo: '/images/江西省贵溪市文坊中小学logo.jpg' },
 ];
