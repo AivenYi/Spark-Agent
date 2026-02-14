@@ -89,14 +89,14 @@ export default function Team() {
         </div>
 
         <div className="marquee-container mb-16">
-              <div className="marquee-track py-2">
+          <div className="marquee-track py-2">
             {[...universities, ...universities].map((uni, index) => (
               <div key={`uni-${index}`} className="marquee-item group flex flex-col items-center mx-4">
-                <div className="w-28 h-28 rounded-2xl bg-white p-4 flex items-center justify-center shadow-sm border border-gray-100 group-hover:bg-red-50 transition-colors">
+                <div className="w-32 h-32 rounded-2xl bg-white p-4 flex items-center justify-center shadow-sm border border-gray-100 group-hover:bg-red-50 transition-colors">
                   <img
                     src={uni.logo}
                     alt={uni.name}
-                    className="max-w-[80%] max-h-[80%] object-contain"
+                    className="max-w-[88%] max-h-[88%] object-contain"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/生成星火延生组织 logo-纯图标版.png'; }}
                   />
                 </div>
