@@ -34,7 +34,7 @@ export default function Features() {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-2 gap-12 items-center">
           {/* Left - Images */}
           <div className="relative">
             <div className="grid grid-cols-2 gap-4">
@@ -89,7 +89,7 @@ export default function Features() {
             </div>
 
             {/* Three Engines */}
-            <div className="flex gap-3 overflow-x-auto snap-x sm:grid sm:grid-cols-3 sm:overflow-visible">
+            <div className="grid grid-cols-3 gap-3">
               <div className="min-w-[220px] snap-start bg-red-50 rounded-xl p-4 border border-red-100 hover:shadow-md transition-shadow">
                 <div className="text-red-600 font-bold text-base sm:text-lg mb-1">"智慧说书人"</div>
                 <div className="text-xs sm:text-sm text-gray-600">实现个性化叙事</div>
@@ -118,7 +118,7 @@ export default function Features() {
 
             {/* Feature Tags */}
             <div className="pt-4">
-              <ul className="space-y-2 sm:grid sm:grid-cols-2 sm:gap-3 sm:space-y-0">
+              <ul className="grid grid-cols-2 gap-3">
                 {features.map((feature, index) => (
                   <li
                     key={index}

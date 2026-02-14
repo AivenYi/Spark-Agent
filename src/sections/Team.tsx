@@ -92,11 +92,11 @@ export default function Team() {
           <div className="marquee-track py-2">
             {[...universities, ...universities].map((uni, index) => (
               <div key={`uni-${index}`} className="marquee-item group flex flex-col items-center mx-4">
-                <div className="w-32 h-32 rounded-2xl bg-white p-4 flex items-center justify-center shadow-sm border border-gray-100 group-hover:bg-red-50 transition-colors">
+                <div className="w-24 h-24 rounded-2xl bg-white p-3 flex items-center justify-center shadow-sm border border-gray-100 group-hover:bg-red-50 transition-colors">
                   <img
                     src={uni.logo}
                     alt={uni.name}
-                    className="max-w-[88%] max-h-[88%] object-contain"
+                    className="max-w-[80%] max-h-[80%] object-contain"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/生成星火延生组织 logo-纯图标版.png'; }}
                   />
                 </div>
@@ -106,11 +106,11 @@ export default function Team() {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-3 gap-8 mb-12">
           {firstRow.map((member, index) => (
             <div
               key={`first-${index}`}
-              className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100"
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100"
             >
               <div className={`bg-gradient-to-r ${member.color} p-4 text-center`}>
                 <h3 className="text-white font-bold text-lg">{member.title}</h3>
@@ -134,11 +134,11 @@ export default function Team() {
           ))}
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-4 gap-8 mb-16">
           {secondRow.map((member, index) => (
             <div
               key={`second-${index}`}
-              className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100"
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100"
             >
               <div className={`bg-gradient-to-r ${member.color} p-4 text-center`}>
                 <h3 className="text-white font-bold text-lg">{member.title}</h3>

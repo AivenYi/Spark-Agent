@@ -72,7 +72,7 @@ export default function Partners() {
         </div>
 
         {/* Honors & Partners Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+        <div className="grid grid-cols-2 gap-12 mb-16">
           {/* Left - Honors */}
           <div>
             <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
@@ -106,7 +106,7 @@ export default function Partners() {
               合作墙
             </h3>
             <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 {partners.map((partner, index) => (
                   <div
                     key={index}
@@ -194,7 +194,7 @@ export default function Partners() {
 
         {/* Future Plan */}
         <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-3xl p-8 lg:p-12 text-white">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">
                 "星火X100英雄"公益计划

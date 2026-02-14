@@ -21,12 +21,12 @@ export default function Hero() {
           alt="背景"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-white/40 sm:from-white/20 sm:to-white/60" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-14">
+        <div className="grid grid-cols-2 gap-8 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left space-y-8">
             {/* Badge */}
@@ -73,15 +73,15 @@ export default function Hero() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-3">
               <Button
                 size="lg"
                 variant="outline"
                 onClick={() => scrollToSection('#process')}
-                className="border-2 border-gray-200 text-gray-800 hover:bg-white px-10 py-7 text-lg rounded-xl transition-all duration-300 shadow-sm hover:shadow-md"
+                className="border-2 border-gray-200 text-gray-800 hover:bg-white px-6 py-4 text-base sm:px-10 sm:py-7 sm:text-lg rounded-xl transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-base font-bold">了解过程</span>
+                  <span className="text-sm sm:text-base font-bold">了解过程</span>
                   <span className="text-[10px] opacity-70 uppercase tracking-widest text-gray-400">View Process</span>
                   <ArrowRight className="w-5 h-5" />
                 </div>
@@ -124,7 +124,7 @@ export default function Hero() {
               <img
                 src="/images/延生个人ip-无背景版.png"
                 alt="延生角色"
-                className="relative z-10 w-full max-w-md lg:max-w-lg drop-shadow-2xl animate-float"
+                className="relative z-10 w-full max-w-xs sm:max-w-sm lg:max-w-lg drop-shadow-2xl animate-float"
               />
               
               {/* Decorative Elements */}
@@ -135,7 +135,7 @@ export default function Hero() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 animate-bounce">
+        <div className="absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 z-30 animate-bounce">
           <button
             onClick={() => scrollToSection('#features')}
             className="p-2 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors"
