@@ -1,4 +1,4 @@
-import { Sparkles, Trophy, MapPin, Calendar, ExternalLink, ArrowRight } from 'lucide-react';
+import { Sparkles, Trophy, MapPin, Calendar, ExternalLink } from 'lucide-react';
 
 const honors = [
   {
@@ -54,7 +54,7 @@ const footprints = [
   },
 ];
 
-import { handleWeChatContact } from '@/lib/contact';
+ 
 
 export default function Partners() {
   return (
@@ -209,36 +209,11 @@ export default function Partners() {
                 <span className="font-medium">期待与您携手同行</span>
               </div>
             </div>
-            <div className="flex justify-center lg:justify-end">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 max-w-sm">
-                <div className="text-center">
-                  <div className="text-5xl font-bold mb-2">100+</div>
-                  <div className="text-red-100">计划合作单位</div>
-                </div>
-                <div className="mt-6 pt-6 border-t border-white/20">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-red-100">已达成合作意向</span>
-                    <span className="font-bold">6+</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div className="hidden lg:block" />
           </div>
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-12 text-center">
-          <p className="text-xl text-gray-700 mb-6">
-            我们期待与更多企业、组织携手，让红色教育走进更多课堂，让历史<span className="text-red-600 font-bold">"活起来"</span>！
-          </p>
-          <button
-            onClick={handleWeChatContact}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium transition-colors shadow-lg shadow-red-200"
-          >
-            联系我们
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
+        
       </div>
     </section>
   );

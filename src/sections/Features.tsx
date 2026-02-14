@@ -89,18 +89,18 @@ export default function Features() {
             </div>
 
             {/* Three Engines */}
-            <div className="grid sm:grid-cols-3 gap-4">
-              <div className="bg-red-50 rounded-xl p-4 border border-red-100 hover:shadow-md transition-shadow">
-                <div className="text-red-600 font-bold text-lg mb-1">"智慧说书人"</div>
-                <div className="text-sm text-gray-600">实现个性化叙事</div>
+            <div className="flex gap-3 overflow-x-auto snap-x sm:grid sm:grid-cols-3 sm:overflow-visible">
+              <div className="min-w-[220px] snap-start bg-red-50 rounded-xl p-4 border border-red-100 hover:shadow-md transition-shadow">
+                <div className="text-red-600 font-bold text-base sm:text-lg mb-1">"智慧说书人"</div>
+                <div className="text-xs sm:text-sm text-gray-600">实现个性化叙事</div>
               </div>
-              <div className="bg-amber-50 rounded-xl p-4 border border-amber-100 hover:shadow-md transition-shadow">
-                <div className="text-amber-600 font-bold text-lg mb-1">"历史抉择时刻"</div>
-                <div className="text-sm text-gray-600">打造沉浸式剧本杀互动</div>
+              <div className="min-w-[220px] snap-start bg-amber-50 rounded-xl p-4 border border-amber-100 hover:shadow-md transition-shadow">
+                <div className="text-amber-600 font-bold text-base sm:text-lg mb-1">"历史抉择时刻"</div>
+                <div className="text-xs sm:text-sm text-gray-600">打造沉浸式剧本杀互动</div>
               </div>
-              <div className="bg-red-50 rounded-xl p-4 border border-red-100 hover:shadow-md transition-shadow">
-                <div className="text-red-600 font-bold text-lg mb-1">"精神时空漂流瓶"</div>
-                <div className="text-sm text-gray-600">完成古今价值衔接</div>
+              <div className="min-w-[220px] snap-start bg-red-50 rounded-xl p-4 border border-red-100 hover:shadow-md transition-shadow">
+                <div className="text-red-600 font-bold text-base sm:text-lg mb-1">"精神时空漂流瓶"</div>
+                <div className="text-xs sm:text-sm text-gray-600">完成古今价值衔接</div>
               </div>
             </div>
 
@@ -117,18 +117,20 @@ export default function Features() {
             </p>
 
             {/* Feature Tags */}
-            <div className="flex flex-wrap gap-3 pt-4">
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-50 to-amber-50 rounded-full border border-red-100"
-                >
-                  <Check className="w-4 h-4 text-red-600" />
-                  <span className="text-sm font-medium text-gray-700">
-                    {feature.text}
-                  </span>
-                </div>
-              ))}
+            <div className="pt-4">
+              <ul className="space-y-2 sm:grid sm:grid-cols-2 sm:gap-3 sm:space-y-0">
+                {features.map((feature, index) => (
+                  <li
+                    key={index}
+                    className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-red-50 to-amber-50 rounded-lg border border-red-100"
+                  >
+                    <Check className="w-4 h-4 text-red-600 flex-shrink-0" />
+                    <span className="text-sm font-medium text-gray-700">
+                      {feature.text}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

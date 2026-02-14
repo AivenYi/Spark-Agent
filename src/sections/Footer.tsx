@@ -1,4 +1,4 @@
-import { MessageCircle, ArrowUp, Sparkles, Heart } from 'lucide-react';
+import { MessageCircle, Sparkles } from 'lucide-react';
 
 import { handleWeChatContact } from '@/lib/contact';
 
@@ -11,9 +11,6 @@ const navLinks = [
 ];
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -96,33 +93,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <span>© 2026 星火延生团队</span>
-              <span className="hidden sm:inline">·</span>
-              <span className="hidden sm:inline">保留所有权利</span>
-            </div>
-            
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <span>用</span>
-              <Heart className="w-4 h-4 text-red-500 fill-red-500" />
-              <span>打造 · 传承红色基因</span>
-            </div>
-
-            {/* Back to Top */}
-            <button
-              onClick={scrollToTop}
-              className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg transition-colors text-sm"
-            >
-              <span>返回顶部</span>
-              <ArrowUp className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </div>
+      
     </footer>
   );
 }
